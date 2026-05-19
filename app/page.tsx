@@ -1,8 +1,21 @@
+import { Hero } from "./components/hero";
+import { Services } from "./components/services";
+import { Demo } from "./components/demo";
+import { Contact } from "./components/contact";
+import { Footer } from "./components/footer";
+import { Nav } from "./components/nav";
+
 export default function Home() {
   return (
-    <main style={{ padding: "4rem", fontFamily: "system-ui, sans-serif" }}>
-      <h1>Webtak AI</h1>
-      <p>Site coming soon. Real content lives in WEB-4.</p>
-    </main>
+    <>
+      <Nav />
+      <main>
+        <Hero />
+        <Services />
+        <Demo />
+        <Contact />
+      </main>
+      <Footer />
+    </>
   );
 }
