@@ -1,32 +1,36 @@
-# website
+# webtak-ai-website
 
 Marketing site for the AI Consulting + Marketing venture.
 
 ## Stack
 - Next.js 15 (App Router) + TypeScript
-- Tailwind CSS
-- Deployed on Vercel (Hobby tier for MVP)
-- Content in MDX
-- Sentry + Vercel Analytics
+- Static export (`output: 'export'`) — single-page marketing site
+- Hosted on Kasserver shared hosting at `ai.webtak.de`
+- Deploy via GitHub Actions FTPS push to Kasserver on every `main` push
 
 ## Local dev
 ```
-pnpm install
-pnpm dev
+npm install
+npm run dev
 ```
 
-## Env vars
-Pulled from 1Password via the Vercel CLI:
+## Build static output
 ```
-vercel env pull .env.local
+npm run build
+# writes to out/
 ```
-Never commit `.env*` files. See [../docs/SECRETS.md](../docs/SECRETS.md).
 
 ## Deploy
-- `main` → production (`ai.webtak.de` or chosen domain)
-- PR branches → preview URLs via Vercel
-- Required CI checks must pass before merge.
+- Push to `main` → GitHub Actions `deploy.yml` builds and FTPS-uploads `out/` to Kasserver
+- Manual: trigger `deploy.yml` from the Actions tab (`workflow_dispatch`)
 
 ## CI
-- Lint + typecheck + build on every PR (`.github/workflows/ci.yml`).
-- Branch protection on `main` requires green CI + 1 review.
+`.github/workflows/ci.yml` runs `npm ci && npm run build` on every PR. Branch protection on `main` requires this check to pass.
+
+## Secrets
+GitHub Actions secrets (set via repo settings):
+- `FTP_HOST` — Kasserver FTP server hostname
+- `FTP_USERNAME` — FTP user
+- `FTP_PASSWORD` — FTP password
+
+Never commit `.env*`. See `../docs/SECRETS.md` for the full secrets policy.
