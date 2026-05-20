@@ -13,6 +13,9 @@ export function Footer() {
           <a href="#contact" className="hover:text-[var(--color-ink)]">
             Contact
           </a>
+          <a href="/datenschutzerklaerung" className="hover:text-[var(--color-ink)]">
+            Datenschutz
+          </a>
         </div>
       </div>
     </footer>
